@@ -1,9 +1,9 @@
 import PureReact from "./PureReact"
-const Hello = (props) => {
-  console.log("Props", props)
+const Hello = ({ name }) => {
+  console.log("Props", name)
   return (
     <div>
-      <p>Hello {props.name}</p>
+      <p>Hello {name}</p>
     </div>
   )
 }

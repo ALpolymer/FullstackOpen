@@ -18,10 +18,10 @@ const PureReact = () => {
     null,
     createElement(
       "div",
-      null,
+      { style: { color: "green", backgroundColor: "whitesmoke" } },
       `hello world it is ${now.toLocaleString()}`,
       elem,
-      createElement("p", null, "hello")
+      createElement("p", null, "hello again")
     ),
     createElement("p", null, `${a} + ${b} is ${a + b}`)
   )
