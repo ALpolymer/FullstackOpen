@@ -1,17 +1,14 @@
 import { createElement } from "react"
-const PureReact = () => {
+const PureReact = (props) => {
   const now = new Date()
   const a = 10
   const b = 20
-  console.log(now, a + b)
 
   const elem = createElement(
     "h1",
     { style: { color: "red", backgroundColor: "blue" } },
-    "HEADER"
+    props.name
   )
-
-  console.log(elem)
 
   return createElement(
     "div",
