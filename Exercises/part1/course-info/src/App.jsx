@@ -8,7 +8,40 @@ const App = () => {
   const exercises3 = 14
   return (
     <div>
-      <h1>{course}</h1>
+      <Header course={course} />
+      <Content
+        part1={part1}
+        part2={part2}
+        part3={part3}
+        exercises1={exercises1}
+        exercises2={exercises2}
+        exercises3={exercises3}
+      />
+
+      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Total
+        exercises1={exercises1}
+        exercises2={exercises2}
+        exercises3={exercises3}
+      />
+    </div>
+  )
+}
+
+const Header = ({ course }) => {
+  return <h1>{course}</h1>
+}
+
+const Content = ({
+  part1,
+  part2,
+  part3,
+  exercises1,
+  exercises2,
+  exercises3,
+}) => {
+  return (
+    <>
       <p>
         {part1} {exercises1}
       </p>
@@ -18,10 +51,12 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
-
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
-    </div>
+    </>
   )
+}
+
+const Total = ({ exercises1, exercises2, exercises3 }) => {
+  return <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
 }
 
 export default App
