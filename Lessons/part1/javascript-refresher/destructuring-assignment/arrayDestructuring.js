@@ -58,9 +58,9 @@ const destructuringExamples = {
 //destructuringExamples.basicArrayDestructuring()
 // destructuringExamples.traditionalAssignment();
 // destructuringExamples.stringDestructuring();
-destructuringExamples.leftSideAssignment()
-// destructuringExamples.restOperatorExample1();
-// destructuringExamples.restOperatorExample2();
+//destructuringExamples.leftSideAssignment()
+//destructuringExamples.restOperatorExample1()
+destructuringExamples.restOperatorExample2()
 
-// Or run all examples at once
+// To run all examples at once
 // Object.values(destructuringExamples).forEach(example => example());
