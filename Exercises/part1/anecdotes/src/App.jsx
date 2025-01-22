@@ -1,5 +1,12 @@
 import { useState } from "react"
 
+/**
+ * App component renders a view with the following features:
+ *   1. A randomly selected anecdote is displayed.
+ *   2. The user can vote for the currently selected anecdote.
+ *   3. The user can select a new anecdote to be displayed.
+ *   4. The highest rated anecdote is displayed at the bottom of the page.
+ */
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -17,10 +24,12 @@ const App = () => {
     Array.from(Array(anecdotes.length), () => 0)
   )
 
+  // Randomly selects an anecdote to be displayed.
   const handleAnecdoteSelection = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length))
   }
 
+  //Increases the vote count of the currently selected anecdote by 1.
   const handleAnecdoteVote = () => {
     const updatedVotes = [...votes]
     updatedVotes[selected] += 1
@@ -40,13 +49,14 @@ const App = () => {
     </div>
   )
 }
-
 export default App
 
+//Renders a button element.
 const Button = ({ text, onClick }) => {
   return <button onClick={onClick}>{text}</button>
 }
 
+//Renders the anecdote with the most votes.
 const TopAnecdote = ({ votes, anecdotes }) => {
   const maxVote = [...votes].sort((a, b) => b - a)[0]
   const indexOfMax = votes.indexOf(maxVote)
@@ -66,6 +76,7 @@ const TopAnecdote = ({ votes, anecdotes }) => {
   )
 }
 
+// Renders the selected anecdote and its number of votes.
 const SelectedAnecdote = ({ votes, anecdotes, selected }) => {
   return (
     <div>
