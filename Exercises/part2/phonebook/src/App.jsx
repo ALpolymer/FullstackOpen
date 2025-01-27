@@ -1,3 +1,5 @@
+import Filter from "./Filter"
+import PersonForm from "./PersonForm"
 import { useState } from "react"
 
 function App() {
@@ -7,7 +9,7 @@ function App() {
     { name: "Dan Abramov", number: "39-44-5323523", id: 3 },
     { name: "Mary Poppendieck", number: "39-44-5323523", id: 4 },
   ])
-  const [filteredPersons, setFilteredPersons] = useState(null)
+  const [filteredPersons, setFilteredPersons] = useState([])
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
 
@@ -38,74 +40,54 @@ function App() {
 
   const handleFilter = (e) => {
     const query = e.target.value
+    console.log("Query", query)
     const filterPersons = persons.filter((person) =>
       new RegExp(`^${query}`, "i").test(person.name)
     )
 
     setFilteredPersons(filterPersons)
   }
-  // console.log("RENDERED!!!")
-  // console.log("NUMBER INPUT", newNumber)
 
-  // console.log("NAME INPUT", newName)
+  console.log("filtered", filteredPersons)
 
-  // console.log("PERSONS", persons)
+  const displayedPersons =
+    filteredPersons.length === 0 ? persons : filteredPersons
+
+  console.log("Displayed", displayedPersons)
+  console.log("Newname", !!newName)
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        <div>
-          filtershown with:
-          <input placeholder="search phonebook" onChange={handleFilter} />
-        </div>
+
+        <Filter onFilter={handleFilter} />
 
         <h1>Add a new</h1>
 
-        <form onSubmit={addName}>
-          <div>
-            name:
-            <input
-              type="text"
-              placeholder="type your name"
-              value={newName}
-              onChange={handleNameChange}
-              required
-            />
-          </div>
-          <div>
-            number:{" "}
-            <input
-              type="tel"
-              pattern="[0-9]{2}-[0-9]{2}-[0-9]{6}"
-              required
-              placeholder="XX-XX-XXXXXX"
-              value={newNumber}
-              onChange={handleNumberChange}
-            />
-          </div>
-          <div>
-            <button type="submit">add</button>
-          </div>
-        </form>
+        <PersonForm
+          onAddName={addName}
+          newName={newName}
+          onNameChange={handleNameChange}
+          newNumber={newNumber}
+          onNumberChange={handleNumberChange}
+        />
+
         <h1>Numbers</h1>
-        {!filteredPersons
-          ? persons.map((person) => {
-              return (
-                <div key={person.id}>
-                  {person.name} {person.number}
-                </div>
-              )
-            })
-          : filteredPersons.map((person) => {
-              return (
-                <div key={person.id}>
-                  {person.name} {person.number}
-                </div>
-              )
-            })}
+
+        <Persons displayedPersons={displayedPersons} />
       </div>
     </>
   )
 }
 
 export default App
+
+const Persons = ({ displayedPersons }) => {
+  return displayedPersons.map((person) => {
+    return (
+      <div key={person.id}>
+        {person.name} {person.number}
+      </div>
+    )
+  })
+}
