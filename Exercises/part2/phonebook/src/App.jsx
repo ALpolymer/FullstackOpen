@@ -1,5 +1,6 @@
 import Filter from "./Filter"
 import PersonForm from "./PersonForm"
+import Persons from "./Persons"
 import { useState } from "react"
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     { name: "Dan Abramov", number: "39-44-5323523", id: 3 },
     { name: "Mary Poppendieck", number: "39-44-5323523", id: 4 },
   ])
-  const [filteredPersons, setFilteredPersons] = useState([])
+
+  const [query, setQuery] = useState("")
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
 
@@ -18,6 +20,7 @@ function App() {
     if (persons.some((person) => person.name === newName.trim())) {
       alert(`${newName} is already added to the phonebook`)
       setNewName("")
+      setNewNumber("")
       return
     } else {
       const nameObj = {
@@ -38,29 +41,28 @@ function App() {
     setNewNumber(e.target.value)
   }
 
-  const handleFilter = (e) => {
-    const query = e.target.value
-    console.log("Query", query)
-    const filterPersons = persons.filter((person) =>
-      new RegExp(`^${query}`, "i").test(person.name)
-    )
-
-    setFilteredPersons(filterPersons)
+  const handleFilterChange = (e) => {
+    setQuery(e.target.value)
   }
 
-  console.log("filtered", filteredPersons)
+  const getFilteredPersons = () => {
+    if (!query) return persons
+    const filtered = persons.filter((person) =>
+      new RegExp(`^${query.trim()}`, "i").test(person.name)
+    )
+    return filtered.length !== 0
+      ? filtered
+      : [{ name: "No match found", number: "", id: 0 }]
+  }
 
-  const displayedPersons =
-    filteredPersons.length === 0 ? persons : filteredPersons
+  const displayedPersons = getFilteredPersons()
 
-  console.log("Displayed", displayedPersons)
-  console.log("Newname", !!newName)
   return (
     <>
       <div>
         <h1>Phonebook</h1>
 
-        <Filter onFilter={handleFilter} />
+        <Filter onFilterChange={handleFilterChange} />
 
         <h1>Add a new</h1>
 
@@ -81,13 +83,3 @@ function App() {
 }
 
 export default App
-
-const Persons = ({ displayedPersons }) => {
-  return displayedPersons.map((person) => {
-    return (
-      <div key={person.id}>
-        {person.name} {person.number}
-      </div>
-    )
-  })
-}

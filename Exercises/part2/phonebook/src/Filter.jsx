@@ -1,8 +1,8 @@
-const Filter = ({ onFilter }) => {
+const Filter = ({ onFilterChange }) => {
   return (
     <div>
       filtershown with:
-      <input placeholder="search phonebook" onChange={onFilter} />
+      <input placeholder="search phonebook" onChange={onFilterChange} />
     </div>
   )
 }
