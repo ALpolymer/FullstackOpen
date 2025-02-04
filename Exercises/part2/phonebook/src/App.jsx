@@ -12,7 +12,6 @@ function App() {
   const [newNumber, setNewNumber] = useState("")
 
   useEffect(() => {
-    console.log("Effect")
     axios
       .get("http://localhost:3001/persons")
       .then((response) => setPersons(response.data))
@@ -29,8 +28,10 @@ function App() {
       const nameObj = {
         name: newName.trim(),
         number: newNumber,
-        id: persons.length + 1,
       }
+      axios
+        .post("http://localhost:3001/persons", nameObj)
+        .then((response) => console.log(response))
       setPersons([...persons, nameObj])
       setNewName("")
       setNewNumber("")
