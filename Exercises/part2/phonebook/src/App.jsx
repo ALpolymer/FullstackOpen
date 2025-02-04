@@ -3,6 +3,7 @@ import PersonForm from "./PersonForm"
 import Persons from "./Persons"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import phoneService from "./services/phones"
 
 function App() {
   const [persons, setPersons] = useState([])
@@ -12,9 +13,7 @@ function App() {
   const [newNumber, setNewNumber] = useState("")
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then((response) => setPersons(response.data))
+    phoneService.getAllPhones().then((catalog) => setPersons(catalog))
   }, [])
 
   const addName = (e) => {
@@ -29,12 +28,11 @@ function App() {
         name: newName.trim(),
         number: newNumber,
       }
-      axios
-        .post("http://localhost:3001/persons", nameObj)
-        .then((response) => console.log(response))
-      setPersons([...persons, nameObj])
-      setNewName("")
-      setNewNumber("")
+      axios.post("http://localhost:3001/persons", nameObj).then((response) => {
+        setPersons([...persons, response.data])
+        setNewName("")
+        setNewNumber("")
+      })
     }
   }
 
