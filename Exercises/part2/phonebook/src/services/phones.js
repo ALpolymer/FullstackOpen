@@ -7,6 +7,11 @@ const getAllPhones = () => {
   return request.then((response) => response.data)
 }
 
+const addNewPhone = (newPhone) => {
+  const request = axios.post(baseURL, newPhone)
+  return request.then((response) => response.data)
+}
 export default {
   getAllPhones,
+  addNewPhone,
 }

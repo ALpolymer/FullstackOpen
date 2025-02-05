@@ -2,7 +2,6 @@ import Filter from "./Filter"
 import PersonForm from "./PersonForm"
 import Persons from "./Persons"
 import { useState, useEffect } from "react"
-import axios from "axios"
 import phoneService from "./services/phones"
 
 function App() {
@@ -28,8 +27,8 @@ function App() {
         name: newName.trim(),
         number: newNumber,
       }
-      axios.post("http://localhost:3001/persons", nameObj).then((response) => {
-        setPersons([...persons, response.data])
+      phoneService.addNewPhone(nameObj).then((newPhone) => {
+        setPersons([...persons, newPhone])
         setNewName("")
         setNewNumber("")
       })
