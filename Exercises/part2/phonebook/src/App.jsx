@@ -3,6 +3,7 @@ import PersonForm from "./PersonForm"
 import Persons from "./Persons"
 import { useState, useEffect } from "react"
 import phoneService from "./services/phones"
+import axios from "axios"
 
 function App() {
   const [persons, setPersons] = useState([])
@@ -32,6 +33,24 @@ function App() {
         setNewName("")
         setNewNumber("")
       })
+    }
+  }
+
+  const deleteName = (id) => {
+    const personToDelete = persons.find((person) => person.id === id)
+    console.log(personToDelete)
+
+    const confirm = window.confirm(`delete ${personToDelete.name} ?`)
+
+    if (confirm) {
+      const updatedPersons = persons.filter((person) => person.id !== id)
+      axios
+        .delete(`http://localhost:3001/persons/${id}`)
+        .then(setPersons(updatedPersons))
+        .catch((error) => console.log(error))
+    } else {
+      console.log("canceled")
+      return
     }
   }
 
@@ -77,7 +96,10 @@ function App() {
 
         <h1>Numbers</h1>
 
-        <Persons displayedPersons={displayedPersons} />
+        <Persons
+          displayedPersons={displayedPersons}
+          onDeleteName={deleteName}
+        />
       </div>
     </>
   )
