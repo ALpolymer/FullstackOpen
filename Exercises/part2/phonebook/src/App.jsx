@@ -1,6 +1,7 @@
 import Filter from "./Filter"
 import PersonForm from "./PersonForm"
 import Persons from "./Persons"
+import { ErrorMessage, SuccessMessage } from "./Messages"
 import { useState, useEffect } from "react"
 import phoneService from "./services/phones"
 
@@ -10,6 +11,7 @@ function App() {
   const [query, setQuery] = useState("")
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
+  const [message, setMessage] = useState(["", ""])
 
   useEffect(() => {
     phoneService
@@ -66,6 +68,12 @@ function App() {
           setNewName("")
           setNewNumber("")
         })
+        .then(() => {
+          setMessage([`Added ${nameObj.name}`, 0])
+          setTimeout(() => {
+            setMessage(["", ""])
+          }, 5000)
+        })
         .catch((error) => console.log(error))
     }
   }
@@ -112,6 +120,8 @@ function App() {
     <>
       <div>
         <h1>Phonebook</h1>
+        <SuccessMessage message={message[0]} />
+        <ErrorMessage message={message[1]} />
 
         <Filter onFilterChange={handleFilterChange} />
 
