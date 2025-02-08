@@ -1,7 +1,7 @@
 import Filter from "./Filter"
 import PersonForm from "./PersonForm"
 import Persons from "./Persons"
-import { ErrorMessage, SuccessMessage } from "./Messages"
+import Message from "./Messages"
 import { useState, useEffect } from "react"
 import phoneService from "./services/phones"
 
@@ -20,6 +20,93 @@ function App() {
       .catch((error) => console.log(error))
   }, [])
 
+  const handleNameChange = (e) => {
+    setNewName(e.target.value)
+  }
+  const handleNumberChange = (e) => {
+    setNewNumber(e.target.value)
+  }
+
+  const handleFilterChange = (e) => {
+    setQuery(e.target.value)
+  }
+
+  const handleUpdateEntry = (name, number) => {
+    const newData = {
+      id: name.id,
+      name: name.name,
+      number: number,
+    }
+    phoneService
+      .updatePhone(newData.id, newData)
+      .then((responseData) => {
+        const updatedData = persons.map((person) => {
+          if (person.id === responseData.id) {
+            return newData
+          } else {
+            return person
+          }
+        })
+        setPersons(updatedData)
+        setMessage([`Updated ${newData.name}'s phone number`, "success"])
+        setTimeout(() => {
+          setMessage(["", ""])
+        }, 5000)
+        setNewName("")
+        setNewNumber("")
+      })
+      .catch((error) => {
+        setPersons(persons.filter((person) => person.id !== newData.id))
+        setMessage([
+          `Information of  ${newData.name} has already been removed from server`,
+          "error",
+        ])
+        setTimeout(() => {
+          setMessage(["", ""])
+        }, 5000)
+        console.log(error)
+        setNewName("")
+        setNewNumber("")
+      })
+  }
+
+  const handleAddEntry = (name, number) => {
+    const nameObj = {
+      name: name.trim(),
+      number: number,
+    }
+
+    phoneService
+      .addNewPhone(nameObj)
+      .then((newPhone) => {
+        setPersons([...persons, newPhone])
+        setNewName("")
+        setNewNumber("")
+      })
+      .then(() => {
+        setMessage([`Added ${nameObj.name}`, "success"])
+        setTimeout(() => {
+          setMessage(["", ""])
+        }, 5000)
+      })
+      .catch((error) => console.log(error))
+  }
+
+  const handleDeleteEntry = (id, name) => {
+    if (confirm) {
+      phoneService
+        .deletePhone(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id))
+          setMessage([`Deleted ${name.name}`, "success"])
+          setTimeout(() => {
+            setMessage(["", ""])
+          }, 5000)
+        })
+        .catch((error) => console.log(error))
+    }
+  }
+
   const addName = (e) => {
     e.preventDefault()
     const existingName = persons.find(
@@ -31,77 +118,23 @@ function App() {
         `${newName} is already added to the phonebook,replace the number with the new one?`
       )
       if (confirm) {
-        const newData = {
-          id: existingName.id,
-          name: existingName.name,
-          number: newNumber,
-        }
-
-        phoneService
-          .updatePhone(newData.id, newData)
-          .then((responseData) => {
-            const updatedData = persons.map((person) => {
-              if (person.id === responseData.id) {
-                return newData
-              } else {
-                return person
-              }
-            })
-            setPersons(updatedData)
-            setNewName("")
-            setNewNumber("")
-          })
-          .catch((error) => console.log(error))
+        handleUpdateEntry(existingName, newNumber)
       }
       setNewName("")
       setNewNumber("")
       return
     } else {
-      const nameObj = {
-        name: newName.trim(),
-        number: newNumber,
-      }
-      phoneService
-        .addNewPhone(nameObj)
-        .then((newPhone) => {
-          setPersons([...persons, newPhone])
-          setNewName("")
-          setNewNumber("")
-        })
-        .then(() => {
-          setMessage([`Added ${nameObj.name}`, 0])
-          setTimeout(() => {
-            setMessage(["", ""])
-          }, 5000)
-        })
-        .catch((error) => console.log(error))
+      handleAddEntry(newName, newNumber)
     }
   }
 
   const deleteName = (id) => {
     const personToDelete = persons.find((person) => person.id === id)
-
     const confirm = window.confirm(`delete ${personToDelete.name} ?`)
-
     if (confirm) {
-      phoneService
-        .deletePhone(id)
-        .then(setPersons(persons.filter((person) => person.id !== id)))
-        .catch((error) => console.log(error))
-    } else {
-      return
+      handleDeleteEntry(id, personToDelete)
     }
-  }
-
-  const handleNameChange = (e) => {
-    setNewName(e.target.value)
-  }
-  const handleNumberChange = (e) => {
-    setNewNumber(e.target.value)
-  }
-
-  const handleFilterChange = (e) => {
-    setQuery(e.target.value)
+    return
   }
 
   const getFilteredPersons = () => {
@@ -115,13 +148,11 @@ function App() {
   }
 
   const displayedPersons = getFilteredPersons()
-
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        <SuccessMessage message={message[0]} />
-        <ErrorMessage message={message[1]} />
+        <Message message={message} />
 
         <Filter onFilterChange={handleFilterChange} />
 

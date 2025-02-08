@@ -1,34 +1,9 @@
 {
   "persons": [
     {
-      "id": "2b7e",
-      "name": "moana",
-      "number": "12-12-121212"
-    },
-    {
-      "id": "8cab",
+      "id": "89d7",
       "name": "maui",
-      "number": "44-44-444444"
-    },
-    {
-      "id": "c7be",
-      "name": "crabs",
-      "number": "55-55-555555"
-    },
-    {
-      "id": "2b22",
-      "name": "fff",
-      "number": "22-22-222222"
-    },
-    {
-      "id": "9127",
-      "name": "grab2",
       "number": "33-33-333333"
-    },
-    {
-      "id": "6933",
-      "name": "alex",
-      "number": "11-11-111111"
     }
   ]
 }
