@@ -3,6 +3,7 @@ import axios from "axios"
 
 const App = () => {
   const [countriesList, setCountriesList] = useState([])
+  const [filteredCountries, setFilteredCountries] = useState([])
   const [searchInput, setSearchInput] = useState("")
   useEffect(() => {
     console.log("Effect")
@@ -10,27 +11,36 @@ const App = () => {
       .get("https://studies.cs.helsinki.fi/restcountries/api/all")
       .then((res) => {
         console.log("Fetched")
-        console.log(res.data)
+        setCountriesList(res.data)
       })
-  }, [countriesList])
+  }, [])
 
-  const handleChange = (e) => {
-    console.log(e.target.value)
-    setSearchInput(e.target.value)
+  const handleInput = (e) => {
+    const input = e.target.value
+    setSearchInput(input)
+    if (countriesList.length !== 0) {
+      const filtered = countriesList.filter((country) =>
+        country.name.common.toLowerCase().includes(input.trim().toLowerCase())
+      )
+      setFilteredCountries(filtered)
+    }
   }
-  const onSearch = (e) => {
-    e.preventDefault()
-  }
-  console.log("DATA", countriesList)
-  console.log("Rendered outside")
+
+  console.log("filteredCountries_OUT", filteredCountries)
   return (
     <>
       <h1>hello</h1>
-      <form onSubmit={onSearch}>
-        find countries:{" "}
-        <input type="text" value={searchInput} onChange={handleChange} />
-      </form>
-      {console.log("Rendered inside")}
+      <span> find countries:</span>
+      <input type="text" value={searchInput} onChange={handleInput} />
+      {console.log("filteredCountries_RENDERED", filteredCountries)}
+
+      {!searchInput ? (
+        <div>no countries</div>
+      ) : filteredCountries.length > 10 ? (
+        <div>too many matches,specify another filter</div>
+      ) : (
+        <div>List of countries</div>
+      )}
     </>
   )
 }
