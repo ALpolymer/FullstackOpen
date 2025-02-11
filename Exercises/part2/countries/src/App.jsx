@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import getAllCountries from "./api"
+import SearchInput from "./SearchInput"
 
 const App = () => {
   const [countriesList, setCountriesList] = useState([])
   const [filteredCountries, setFilteredCountries] = useState([])
   const [searchInput, setSearchInput] = useState("")
+
   useEffect(() => {
     getAllCountries()
       .then((data) => {
@@ -27,9 +29,7 @@ const App = () => {
   console.log("filteredCountries_OUT", filteredCountries)
   return (
     <>
-      <h1>hello</h1>
-      <span> find countries:</span>
-      <input type="text" value={searchInput} onChange={handleInput} />
+      <SearchInput searchInput={searchInput} onInputChange={handleInput} />
       {console.log("filteredCountries_RENDERED", filteredCountries)}
 
       {!searchInput ? (
