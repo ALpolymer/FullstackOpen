@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
+import getAllCountries from "./api"
 
 const App = () => {
   const [countriesList, setCountriesList] = useState([])
   const [filteredCountries, setFilteredCountries] = useState([])
   const [searchInput, setSearchInput] = useState("")
   useEffect(() => {
-    console.log("Effect")
-    axios
-      .get("https://studies.cs.helsinki.fi/restcountries/api/all")
-      .then((res) => {
-        console.log("Fetched")
-        setCountriesList(res.data)
+    getAllCountries()
+      .then((data) => {
+        setCountriesList(data)
       })
+      .catch((err) => console.log(err))
   }, [])
 
   const handleInput = (e) => {
