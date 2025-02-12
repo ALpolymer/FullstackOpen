@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import getAllCountries from "./api"
 import SearchInput from "./SearchInput"
+import CountriesList from "./CountriesList"
 
 const App = () => {
   const [countriesList, setCountriesList] = useState([])
@@ -32,13 +33,10 @@ const App = () => {
       <SearchInput searchInput={searchInput} onInputChange={handleInput} />
       {console.log("filteredCountries_RENDERED", filteredCountries)}
 
-      {!searchInput ? (
-        <div>no countries</div>
-      ) : filteredCountries.length > 10 ? (
-        <div>too many matches,specify another filter</div>
-      ) : (
-        <div>List of countries</div>
-      )}
+      <CountriesList
+        searchInput={searchInput}
+        filteredCountries={filteredCountries}
+      />
     </>
   )
 }
