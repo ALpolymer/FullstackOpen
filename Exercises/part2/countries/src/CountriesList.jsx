@@ -27,13 +27,20 @@ const CountryName = ({ name }) => {
 }
 
 const CountryDetails = ({ country }) => {
+  const countryData = country[0]
+  const languages = Object.values(countryData.languages)
   console.log("Country", country)
-  return country.map((item) => (
-    <div key={item.area}>
-      <h1>{item.name.common}</h1>
-      <p>capital : {item.capital[0]}</p>
+  console.log("languages", languages)
+  return (
+    <div key={countryData.area}>
+      <h1>{countryData.name.common}</h1>
+      <p>capital : {countryData.capital[0]}</p>
       <h2>languages</h2>
-      {console.log(item.languages)}
+      <ul>
+        {languages.map((language, id) => (
+          <li key={id}>{language}</li>
+        ))}
+      </ul>
     </div>
-  ))
+  )
 }
