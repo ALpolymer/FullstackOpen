@@ -1,4 +1,17 @@
+import { useState } from "react"
+
 const CountriesList = ({ searchInput, filteredCountries }) => {
+  const [toggleDetails, setToggleDetails] = useState(false)
+  const [selectedCountry, setSelectedCountry] = useState(null)
+
+  const findCountry = (name) => {
+    const countryFound = filteredCountries.find(
+      (country) => country.name.common === name
+    )
+    console.log(countryFound)
+    console.log(Array.isArray(countryFound))
+    setSelectedCountry(countryFound)
+  }
   return (
     <>
       {!searchInput ? (
@@ -7,12 +20,20 @@ const CountriesList = ({ searchInput, filteredCountries }) => {
         <div>too many matches,specify another filter</div>
       ) : filteredCountries.length === 0 ? (
         <div>No match found</div>
-      ) : filteredCountries.length === 1 ? (
-        <CountryDetails country={filteredCountries} />
+      ) : toggleDetails ? (
+        <CountryDetails
+          country={selectedCountry}
+          onToggleDetails={setToggleDetails}
+        />
       ) : (
         <ul>
           {filteredCountries.map((country) => (
-            <CountryName key={country.area} name={country.name.common} />
+            <CountryName
+              key={country.area}
+              name={country.name.common}
+              onToggleDetails={setToggleDetails}
+              findCountry={findCountry}
+            />
           ))}
         </ul>
       )}
@@ -22,19 +43,27 @@ const CountriesList = ({ searchInput, filteredCountries }) => {
 
 export default CountriesList
 
-const CountryName = ({ name }) => {
-  return <li>{name}</li>
+const CountryName = ({ name, onToggleDetails, findCountry }) => {
+  const handleClick = () => {
+    onToggleDetails((prev) => !prev)
+    findCountry(name)
+  }
+  return (
+    <li>
+      {name}
+      <button onClick={handleClick}>Show</button>
+    </li>
+  )
 }
 
-const CountryDetails = ({ country }) => {
-  const countryData = country[0]
-  const languages = Object.values(countryData.languages)
+const CountryDetails = ({ country, onToggleDetails }) => {
+  const languages = Object.values(country.languages)
   console.log("Country", country)
   console.log("languages", languages)
   return (
-    <div key={countryData.area}>
-      <h1>{countryData.name.common}</h1>
-      <p>capital : {countryData.capital[0]}</p>
+    <div key={country.area}>
+      <h1>{country.name.common}</h1>
+      <p>capital : {country.capital[0]}</p>
       <h2>languages</h2>
       <ul>
         {languages.map((language, id) => (
@@ -42,7 +71,11 @@ const CountryDetails = ({ country }) => {
         ))}
       </ul>
 
-      <img src={countryData.flags.png} alt={countryData.flags.alt} />
+      <img src={country.flags.png} alt={country.flags.alt} />
+      <br />
+      <button onClick={() => onToggleDetails((prev) => !prev)}>
+        Switch to countries list
+      </button>
     </div>
   )
 }
