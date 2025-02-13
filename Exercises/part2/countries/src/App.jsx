@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import getAllCountries from "./api"
 import SearchInput from "./SearchInput"
-import CountriesList from "./CountriesList"
+import Countries from "./Countries"
 
 const App = () => {
   const [countriesList, setCountriesList] = useState([])
@@ -33,7 +33,7 @@ const App = () => {
       <SearchInput searchInput={searchInput} onInputChange={handleInput} />
       {console.log("filteredCountries_RENDERED", filteredCountries)}
 
-      <CountriesList
+      <Countries
         searchInput={searchInput}
         filteredCountries={filteredCountries}
       />

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const CountriesList = ({ searchInput, filteredCountries }) => {
+const Countries = ({ searchInput, filteredCountries }) => {
   const [toggleDetails, setToggleDetails] = useState(false)
   const [selectedCountry, setSelectedCountry] = useState(null)
 
@@ -28,7 +28,7 @@ const CountriesList = ({ searchInput, filteredCountries }) => {
       ) : (
         <ul>
           {filteredCountries.map((country) => (
-            <CountryName
+            <CountriesList
               key={country.area}
               name={country.name.common}
               onToggleDetails={setToggleDetails}
@@ -41,9 +41,9 @@ const CountriesList = ({ searchInput, filteredCountries }) => {
   )
 }
 
-export default CountriesList
+export default Countries
 
-const CountryName = ({ name, onToggleDetails, findCountry }) => {
+const CountriesList = ({ name, onToggleDetails, findCountry }) => {
   const handleClick = () => {
     onToggleDetails((prev) => !prev)
     findCountry(name)
