@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
 import { getCityWeatherData } from "./api"
-import axios from "axios"
-// const key = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
-// const baseUrl = "https://api.openweathermap.org/data/2.5/weather?"
 
 const Weather = ({ country }) => {
   const [weatherData, setWeatherData] = useState({ allData: null, icon: "" })
@@ -10,15 +7,15 @@ const Weather = ({ country }) => {
   const city = country.capital[0]
 
   useEffect(() => {
-    getCityWeatherData(city).then((data) => {
-      setWeatherData({ allData: data, icon: data.weather[0].icon })
-    })
+    getCityWeatherData(city)
+      .then((data) => {
+        setWeatherData({ allData: data, icon: data.weather[0].icon })
+      })
+      .catch((error) => console.log(error))
   }, [city])
 
   if (!weatherData.allData) {
     return <h1>Loading....</h1>
-  } else {
-    console.log("datafetched", weatherData)
   }
   return (
     <div>

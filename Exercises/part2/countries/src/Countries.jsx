@@ -58,8 +58,7 @@ const CountriesList = ({ name, onToggleDetails, findCountry }) => {
 
 const CountryDetails = ({ country, onToggleDetails }) => {
   const languages = Object.values(country.languages)
-  console.log("Country", country)
-  console.log("languages", languages)
+
   return (
     <div key={country.area}>
       <h1>{country.name.common}</h1>

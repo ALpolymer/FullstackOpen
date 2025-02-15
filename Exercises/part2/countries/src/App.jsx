@@ -27,11 +27,9 @@ const App = () => {
     }
   }
 
-  console.log("filteredCountries_OUT", filteredCountries)
   return (
     <>
       <SearchInput searchInput={searchInput} onInputChange={handleInput} />
-      {console.log("filteredCountries_RENDERED", filteredCountries)}
 
       <Countries
         searchInput={searchInput}
