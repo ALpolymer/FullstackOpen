@@ -27,6 +27,10 @@ const App = () => {
     }
   }
 
+  if (countriesList.length === 0) {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <>
       <SearchInput searchInput={searchInput} onInputChange={handleInput} />
