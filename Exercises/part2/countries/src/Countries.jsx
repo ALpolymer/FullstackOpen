@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Weather from "./Weather"
 
 const Countries = ({ searchInput, filteredCountries }) => {
   const [toggleDetails, setToggleDetails] = useState(false)
@@ -8,8 +9,7 @@ const Countries = ({ searchInput, filteredCountries }) => {
     const countryFound = filteredCountries.find(
       (country) => country.name.common === name
     )
-    console.log(countryFound)
-    console.log(Array.isArray(countryFound))
+
     setSelectedCountry(countryFound)
   }
   return (
@@ -63,7 +63,8 @@ const CountryDetails = ({ country, onToggleDetails }) => {
   return (
     <div key={country.area}>
       <h1>{country.name.common}</h1>
-      <p>capital : {country.capital[0]}</p>
+      <div>Capital : {country.capital[0]}</div>
+      <div>Area: {country.area}</div>
       <h2>languages</h2>
       <ul>
         {languages.map((language, id) => (
@@ -72,6 +73,9 @@ const CountryDetails = ({ country, onToggleDetails }) => {
       </ul>
 
       <img src={country.flags.png} alt={country.flags.alt} />
+
+      <Weather country={country} />
+
       <br />
       <button onClick={() => onToggleDetails((prev) => !prev)}>
         Switch to countries list
