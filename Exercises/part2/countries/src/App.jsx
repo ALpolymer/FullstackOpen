@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import getAllCountries from "./api"
+import { getAllCountries } from "./api"
 import SearchInput from "./SearchInput"
 import Countries from "./Countries"
 

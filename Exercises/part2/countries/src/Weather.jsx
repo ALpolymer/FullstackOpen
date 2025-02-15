@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import axios from "axios"
-const key = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
-const baseUrl = "https://api.openweathermap.org/data/2.5/weather?"
+import { getCityWeatherData } from "./api"
+// import axios from "axios"
+// const key = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
+// const baseUrl = "https://api.openweathermap.org/data/2.5/weather?"
 
 const Weather = ({ country }) => {
   const [weatherData, setWeatherData] = useState([])
@@ -9,12 +10,22 @@ const Weather = ({ country }) => {
   const city = country.capital[0]
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}q=${city}&units=metric&appid=${key}`)
-      .then((response) => console.log(response.data))
+    getCityWeatherData(city).then((data) => {
+      setWeatherData(data)
+    })
   }, [])
+  console.log(weatherData.wind.speed)
+  if (weatherData.length === 0) {
+    return <h1>Loading....</h1>
+  }
+  return (
+    <div>
+      <h1>Weather in {city}</h1>
+      <p>Temperature: {weatherData.main.temp} Celsius</p>
 
-  return <h1>Weather in {city}</h1>
+      <p>Wind: {weatherData.wind.speed} m/s</p>
+    </div>
+  )
 }
 
 export default Weather

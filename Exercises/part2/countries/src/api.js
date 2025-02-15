@@ -1,9 +1,19 @@
 import axios from "axios"
-const baseUrl = "https://studies.cs.helsinki.fi/restcountries/api/all"
+const countriesUrl = "https://studies.cs.helsinki.fi/restcountries/api/all"
+const weatherApiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
+const weatherDataUrl = "https://api.openweathermap.org/data/2.5/weather?"
 
 const getAllCountries = () => {
-  const request = axios.get(baseUrl)
+  const request = axios.get(countriesUrl)
   return request.then((response) => response.data)
 }
 
-export default getAllCountries
+const getCityWeatherData = (cityName) => {
+  const request = axios.get(
+    `${weatherDataUrl}q=${cityName}&units=metric&appid=${weatherApiKey}`
+  )
+
+  return request.then((response) => response.data)
+}
+
+export { getAllCountries, getCityWeatherData }
