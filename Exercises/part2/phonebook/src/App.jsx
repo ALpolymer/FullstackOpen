@@ -103,7 +103,18 @@ function App() {
             setMessage(["", ""])
           }, 5000)
         })
-        .catch((error) => console.log(error))
+        .catch((error) => {
+          setPersons(persons.filter((person) => person.id !== id))
+          setMessage([
+            `Information of  ${name.name} has already been removed from server`,
+            "error",
+          ])
+          setTimeout(() => {
+            setMessage(["", ""])
+          }, 5000)
+
+          console.log(error)
+        })
     }
   }
 
