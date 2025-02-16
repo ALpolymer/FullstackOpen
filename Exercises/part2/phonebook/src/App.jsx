@@ -166,7 +166,7 @@ function App() {
           onNumberChange={handleNumberChange}
         />
 
-        <h1>Numbers</h1>
+        <h3>Numbers</h3>
 
         <Persons
           displayedPersons={displayedPersons}
