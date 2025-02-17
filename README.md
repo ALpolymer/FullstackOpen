@@ -11,10 +11,10 @@ This repository contains my submissions for the course [Full stack open](https:/
 > [!NOTE]  
 > The folder `Exercises` contains the submitted exercises per part.
 
-
 ## Progress
 
 | part | hours | exercises |  status  | certificate |
 | :--: | :---: | :-------: | :------: | :---------- |
 |  0   |   4   |    6/6    | &#x2713; |             |
-|  1   |   13  |    14/14    | &#x2713; |             |
+|  1   |  13   |   14/14   | &#x2713; |             |
+|  2   |  28   |   20/20   | &#x2713; |             |
