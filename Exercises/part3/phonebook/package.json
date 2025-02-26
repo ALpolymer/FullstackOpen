@@ -10,5 +10,8 @@
   },
   "keywords": [],
   "author": "Alexandros Polymeros",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
