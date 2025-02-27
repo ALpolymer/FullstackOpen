@@ -28,6 +28,11 @@ let entries = [
 
 const generateId = () => Math.floor(Math.random() * 10 ** 6)
 
+const duplicateChecker = (name) => {
+  const checker = entries.some((e) => e.name === name)
+  return checker
+}
+
 app.get("/api/info", (req, res) => {
   const entriesLength = entries.length
   const dateTime = new Date().toString()
@@ -59,11 +64,27 @@ app.delete("/api/persons/:id", (req, res) => {
 
 app.post("/api/persons", (req, res) => {
   const entry = req.body
-  const id = generateId()
-  entry.id = id
-  entries = [...entries, entry]
 
-  res.json(entry)
+  if (!entry.name) {
+    return res.status(400).json({ error: "entry name is missing" })
+  }
+
+  if (!entry.number) {
+    return res.status(400).json({ error: "entry number is missing" })
+  }
+
+  if (entries.some((e) => e.name === entry.name)) {
+    return res.status(400).json({ error: "entry name already exists" })
+  }
+
+  const newEntry = {
+    id: generateId(),
+    name: entry.name,
+    number: entry.number,
+  }
+
+  entries = [...entries, newEntry]
+  res.json(newEntry)
 })
 
 const PORT = 3001
