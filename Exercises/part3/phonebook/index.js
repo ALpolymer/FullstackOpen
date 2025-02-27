@@ -3,7 +3,7 @@ const app = express()
 
 app.use(express.json())
 
-const entries = [
+let entries = [
   {
     id: "1",
     name: "Arto Hellas",
@@ -47,6 +47,12 @@ app.get("/api/persons/:id", (req, res) => {
   } else {
     res.status(404).end()
   }
+})
+
+app.delete("/api/persons/:id", (req, res) => {
+  const id = req.params.id
+  entries = entries.filter((e) => e.id !== id)
+  res.status(204).end()
 })
 
 const PORT = 3001
