@@ -1,7 +1,15 @@
 const express = require("express")
 const app = express()
+const morgan = require("morgan")
 
 app.use(express.json())
+morgan.token("body", (req) => {
+  return JSON.stringify(req.body)
+})
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+)
 
 let entries = [
   {
@@ -32,6 +40,10 @@ const duplicateChecker = (name) => {
   const checker = entries.some((e) => e.name === name)
   return checker
 }
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Phonebook App!!!")
+})
 
 app.get("/api/info", (req, res) => {
   const entriesLength = entries.length
