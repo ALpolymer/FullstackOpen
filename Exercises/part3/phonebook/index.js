@@ -26,6 +26,8 @@ let entries = [
   },
 ]
 
+const generateId = () => Math.floor(Math.random() * 10 ** 6)
+
 app.get("/api/info", (req, res) => {
   const entriesLength = entries.length
   const dateTime = new Date().toString()
@@ -53,6 +55,15 @@ app.delete("/api/persons/:id", (req, res) => {
   const id = req.params.id
   entries = entries.filter((e) => e.id !== id)
   res.status(204).end()
+})
+
+app.post("/api/persons", (req, res) => {
+  const entry = req.body
+  const id = generateId()
+  entry.id = id
+  entries = [...entries, entry]
+
+  res.json(entry)
 })
 
 const PORT = 3001
