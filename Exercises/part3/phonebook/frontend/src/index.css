@@ -49,6 +49,11 @@ h6 {
   overflow-wrap: break-word;
 }
 
+body {
+  background-color: antiquewhite;
+  padding: 0.5rem;
+}
+
 .error {
   color: red;
   background: lightgrey;

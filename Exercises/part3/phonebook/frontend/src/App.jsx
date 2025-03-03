@@ -1,9 +1,9 @@
-import Filter from "./Filter"
-import PersonForm from "./PersonForm"
-import Persons from "./Persons"
-import Message from "./Messages"
 import { useState, useEffect } from "react"
 import phoneService from "./services/phones"
+import Filter from "./components/Filter"
+import Message from "./components/Messages"
+import PersonForm from "./components/PersonForm"
+import Persons from "./components/Persons"
 
 function App() {
   const [persons, setPersons] = useState([])
