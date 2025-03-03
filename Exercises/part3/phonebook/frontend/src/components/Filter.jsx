@@ -1,5 +1,10 @@
-import React from "react"
-
-export default function Filter() {
-  return <div>Filter</div>
+const Filter = ({ onFilterChange }) => {
+  return (
+    <div>
+      filtershown with:
+      <input placeholder="search phonebook" onChange={onFilterChange} />
+    </div>
+  )
 }
+
+export default Filter
