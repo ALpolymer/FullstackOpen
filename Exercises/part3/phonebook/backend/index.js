@@ -36,11 +36,6 @@ let entries = [
 
 const generateId = () => Math.floor(Math.random() * 10 ** 6)
 
-const duplicateChecker = (name) => {
-  const checker = entries.some((e) => e.name === name)
-  return checker
-}
-
 app.get("/", (req, res) => {
   res.send("Welcome to Phonebook App!!!")
 })
