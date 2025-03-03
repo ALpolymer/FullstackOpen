@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Phonebook App!!!")
 })
 
-app.get("/api/info", (req, res) => {
+app.get("/info", (req, res) => {
   const entriesLength = entries.length
   const dateTime = new Date().toString()
   res.send(`<p>Phonebook has info for ${entriesLength} people</p>
