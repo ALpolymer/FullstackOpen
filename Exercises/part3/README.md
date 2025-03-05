@@ -10,4 +10,5 @@
 | 3.4       | Implemented deletion of a single entry         | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/81469fe81d34636b45987bd5f0adfb1ed33c29b2/Exercises) |
 | 3.5       | Implemented POST request for a single entry    | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/b0e452c1b7057c7f9310ae81fa5c332fe29a0c24/Exercises) |
 | 3.6       | Implemented error handling                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/3022b7a938dea2c7b5a6d4662370b1b5f487f00c/Exercises) |
-| 3.7 & 3.8 | Implemented morgan middleware logs             | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/3022b7a938dea2c7b5a6d4662370b1b5f487f00c/Exercises) |
+| 3.7 & 3.8 | Implemented morgan middleware logs             | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/4b3d8189f6d07682dcc1c37f4bf38b58ce34c27d/Exercises) |
+| 3.9       | Frontend & backend work together               | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/97fa85c7d175fc09a0cecab32d8fba9dc356746f/Exercises) |
