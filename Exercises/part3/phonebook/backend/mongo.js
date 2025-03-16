@@ -27,7 +27,18 @@ const person = new Person({
   number: number,
 })
 
-person.save().then((res) => {
-  console.log(`added ${name} number ${number} to phonebook`)
-  mongoose.connection.close()
-})
+if (process.argv.length === 3) {
+  Person.find({}).then((res) => {
+    res.forEach((person) => {
+      console.log(person)
+    })
+    mongoose.connection.close()
+  })
+
+  return
+} else {
+  person.save().then((res) => {
+    console.log(`added ${name} number ${number} to phonebook`)
+    mongoose.connection.close()
+  })
+}
