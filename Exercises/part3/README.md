@@ -12,5 +12,5 @@
 | 3.6         | Implemented error handling                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/3022b7a938dea2c7b5a6d4662370b1b5f487f00c/Exercises)       |
 | 3.7 & 3.8   | Implemented morgan middleware logs             | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/4b3d8189f6d07682dcc1c37f4bf38b58ce34c27d/Exercises)       |
 | 3.9         | Frontend & backend work together               | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/97fa85c7d175fc09a0cecab32d8fba9dc356746f/Exercises)       |
-| 3.10 & 3.11 | Deployed fullstack phonebook app               | [App Link](https://fullstackopen-part3-mhao.onrender.com/)                                                                |
+| 3.10 & 3.11 | Deployed fullstack phonebook app               | [App Link](https://fso-part3-prod.onrender.com/)                                                                          |
 | 3.12        | Command line Database                          | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/af896f5db13760f3d3e16057984a5b36eb18da99/Exercises/part3) |
