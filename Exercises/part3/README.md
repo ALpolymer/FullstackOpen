@@ -15,3 +15,4 @@
 | 3.10 & 3.11 | Deployed fullstack phonebook app               | [App Link](https://fso-part3-prod.onrender.com/)                                                                          |
 | 3.12        | Command line Database                          | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/af896f5db13760f3d3e16057984a5b36eb18da99/Exercises/part3) |
 | 3.13        | Phonebook database, step 1                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/main/Exercises/part3/phonebook)                           |
+| 3.14        | Phonebook database, step 2                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/main/Exercises/part3)                                     |
