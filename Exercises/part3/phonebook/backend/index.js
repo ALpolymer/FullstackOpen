@@ -84,18 +84,14 @@ app.post("/api/persons", (req, res) => {
     return res.status(400).json({ error: "entry number is missing" })
   }
 
-  if (entries.some((e) => e.name === entry.name)) {
-    return res.status(400).json({ error: "entry name already exists" })
-  }
-
-  const newEntry = {
-    id: generateId(),
+  const person = new Person({
     name: entry.name,
     number: entry.number,
-  }
+  })
 
-  entries = [...entries, newEntry]
-  res.json(newEntry)
+  person.save().then((savedPerson) => {
+    res.json(savedPerson)
+  })
 })
 
 const PORT = process.env.PORT || 3001
