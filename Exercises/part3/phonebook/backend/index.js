@@ -50,6 +50,7 @@ app.get("/info", (req, res) => {
     `)
 })
 
+//DB GET ALL ENTRIES
 app.get("/api/persons", (req, res) => {
   Person.find({}).then((persons) => {
     res.json(persons)
@@ -69,10 +70,15 @@ app.get("/api/persons/:id", (req, res) => {
 
 app.delete("/api/persons/:id", (req, res) => {
   const id = req.params.id
-  entries = entries.filter((e) => e.id !== id)
-  res.status(204).end()
+
+  Person.findByIdAndDelete(id)
+    .then((result) => {
+      res.status(204).end()
+    })
+    .catch((err) => console.log(err))
 })
 
+//DB POST
 app.post("/api/persons", (req, res) => {
   const entry = req.body
 
