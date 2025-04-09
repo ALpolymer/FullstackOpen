@@ -14,5 +14,6 @@
 | 3.9         | Frontend & backend work together               | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/97fa85c7d175fc09a0cecab32d8fba9dc356746f/Exercises)       |
 | 3.10 & 3.11 | Deployed fullstack phonebook app               | [App Link](https://fso-part3-prod.onrender.com/)                                                                          |
 | 3.12        | Command line Database                          | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/af896f5db13760f3d3e16057984a5b36eb18da99/Exercises/part3) |
-| 3.13        | Phonebook database, step 1                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/main/Exercises/part3/phonebook)                           |
-| 3.14        | Phonebook database, step 2                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/main/Exercises/part3)                                     |
+| 3.13        | Phonebook database, step 1                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/a7aba2a1d802c78f455c6cae55e3630cdb595f22)                 |
+| 3.14        | Phonebook database, step 2                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/fdb1d5d5796905bd9f2c4cedf223cbe5f3be67f7)                 |
+| 3.15        | Phonebook database, step 3                     | [View Solution](https://github.com/ALpolymer/FullstackOpen/tree/30988e5fedcb70f4021d357d7ad2789d22a4ea85)                 |
